@@ -5,6 +5,7 @@ import {
   Post,
   Render,
   Request,
+  Response,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -23,8 +24,12 @@ export class AuthController {
 
   @UseGuards(AuthGuard('local'))
   @Post('')
-  async login(@Request() req) {
-    return this.authService.login(req.body);
+  async login(@Request() req, @Response() res) {
+    // return this.authService.login(req.body);
+    res.redirect(
+      'https://pitangui.amazon.com/spa/skill/account-linking-status.html?vendorId=M2MK17LVKJ8S1F',
+    );
+    
   }
 
   @UseGuards(JwtAuthGuard)
