@@ -25,11 +25,18 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @Post('')
   async login(@Request() req, @Response() res) {
-    // return this.authService.login(req.body);
+    const token = await this.authService.login(req.body);
+    console.log('*******************************');
+    console.log('*******************************');
+    console.log(token);
+    console.log('*******************************');
+    console.log('*******************************');
     res.redirect(
-      'https://pitangui.amazon.com/spa/skill/account-linking-status.html?vendorId=M2MK17LVKJ8S1F',
-    );
-    
+      `https://pitangui.amazon.com/spa/skill/account-linking-status.html?vendorId=M2MK17LVKJ8S1F?access_token=${token?.access_token ?? null}`,
+      );
+    return {
+      access_token: token,
+    };
   }
 
   @UseGuards(JwtAuthGuard)

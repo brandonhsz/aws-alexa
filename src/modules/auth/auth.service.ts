@@ -10,9 +10,9 @@ export class AuthService {
   }
 
   async login(user: any) {
-    if (!user.username || !user.password) {
-      return new UnauthorizedException();
-    }
+    // if (!user.username || !user.password) {
+    //   return new UnauthorizedException();
+    // }
     const payload = { username: user.username };
     const jwt = this.jwtService.sign(payload);
 
